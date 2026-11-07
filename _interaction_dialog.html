@@ -1,0 +1,8 @@
+{% from "_macros.html" import modal %}
+{% call modal('interactionDialog', 'COMMUNICATION LOG', 'Log an interaction', url_for('interaction_new'), 'Log interaction') %}
+<div class="form-grid">
+  <div class="field"><label for="in_c">Customer *</label><select id="in_c" name="customer_id" required>{% if customers is defined %}<option value="">Choose…</option>{% for x in customers %}<option value="{{ x.customer_id }}">{{ x.first_name }} {{ x.last_name }}</option>{% endfor %}{% else %}<option value="{{ c.customer_id }}">{{ c.first_name }} {{ c.last_name }}</option>{% endif %}</select></div>
+  <div class="field"><label for="in_ch">Channel *</label><select id="in_ch" name="channel"><option>Call</option><option>Email</option><option>Chat</option><option>Walk-in</option></select></div>
+  <div class="field span-2"><label for="in_n">Notes *</label><textarea id="in_n" name="notes" rows="3" required maxlength="400" placeholder="What was discussed?"></textarea></div>
+</div>
+{% endcall %}

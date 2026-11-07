@@ -1,0 +1,35 @@
+{% from "_macros.html" import badge %}
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Elegance Fur Real Pet Salon CRM Hub">
+<title>{% block title %}{{ page_title }}{% endblock %} | Elegance Fur Real CRM Hub</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head><body>
+{% block shell %}
+{% set active = 'customers' if ep == 'customer' else ep %}
+<div class="app-shell">
+<aside id="sidebar" class="sidebar">
+  <div class="sidebar-brand"><span class="brand-mark small">✦</span><div><strong>Elegance Fur Real</strong><small>CRM HUB</small></div></div>
+  <div class="user-chip"><div class="avatar">{{ session.name|initials }}</div><div class="user-chip-text"><strong>{{ session.name }}</strong><span>{{ session.role }}</span></div><span class="online-dot" aria-label="Signed in"></span></div>
+  <nav class="main-nav" aria-label="Main navigation">
+    {% for section, items in nav %}<div class="nav-section">{{ section }}</div>
+    {% for ep_, label, icon in items %}<a class="nav-link {{ 'active' if active == ep_ }}" href="{{ url_for(ep_) }}"><span aria-hidden="true">{{ icon }}</span>{{ label }}</a>{% endfor %}{% endfor %}
+  </nav>
+  <div class="sidebar-bottom">
+    <div class="prototype-note"><span>ⓘ</span><p><strong>{{ session.role }} workspace</strong><br>Signed in as {{ session.name }}.</p></div>
+    <a class="nav-link logout-link" href="{{ url_for('logout') }}"><span>↪</span> Sign out</a>
+  </div>
+</aside>
+<div class="main-column">
+  <header class="topbar">
+    <button id="mobileMenuBtn" class="icon-btn mobile-menu" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    <div><p class="eyebrow">{{ today_label }}</p><h1>{{ page_title }}</h1></div>
+    <div class="topbar-right"><span class="status-pill"><span class="online-dot"></span> {{ session.role }}</span>
+      {% if is_desk %}<a class="btn primary" href="{{ url_for('appointments', open='apptDialog') }}"><span>＋</span> New appointment</a>{% endif %}</div>
+  </header>
+  <div id="noticeRegion" class="notice-region" aria-live="polite">{% for cat, msg in get_flashed_messages(with_categories=true) %}<div class="toast {{ 'success' if cat == 'ok' else 'error' }}" role="status">{{ msg }}</div>{% endfor %}</div>
+  <main id="pageContent" class="page-content">{% block body %}{% endblock %}</main>
+  <footer class="app-footer">Elegance Fur Real CRM Hub <span>•</span> Pet Salon customer relationship management</footer>
+</div></div>
+{% block dialogs %}{% endblock %}
+{% endblock %}
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body></html>

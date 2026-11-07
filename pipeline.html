@@ -1,0 +1,22 @@
+{% extends "base.html" %}{% from "_macros.html" import head, badge, modal, empty %}
+{% block body %}
+{% call head('Sales pipeline', 'Move opportunities from Lead to Won or Lost. A Won opportunity creates a Scheduled order in Appointments.') %}
+<button class="btn primary" data-dialog="leadDialog">＋ Add lead</button>{% endcall %}
+<div class="board">{% for st in stages %}{% set items = opps|selectattr('stage', 'equalto', st)|list %}
+<div class="board-col"><h4>{{ st }} <span>{{ items|length }}</span></h4>
+{% for o in items %}<div class="opp-card"><strong>{{ o.cname }}</strong>{{ o.service_name or 'No service chosen' }}
+<div class="amt">{{ o.expected_amount|peso }}</div><small>Close: {{ o.expected_close_date|dlabel if o.expected_close_date else 'no date' }}</small><small>Owner: {{ o.owner or '—' }}</small>
+{% if o.order_id %}<small style="margin-top:6px"><span class="chip">→ {{ o.order_id|code('APT') }}</span></small>{% endif %}
+<form method="post" action="{{ url_for('opp_move', oid=o.opportunity_id) }}"><select name="stage" data-autosubmit aria-label="Move {{ o.cname }} to stage">{% for s2 in stages %}<option {{ 'selected' if s2 == st }}>{{ s2 }}</option>{% endfor %}</select></form></div>
+{% else %}<p class="tiny muted" style="padding:6px 4px">Nothing here.</p>{% endfor %}</div>{% endfor %}</div>
+{% endblock %}
+{% block dialogs %}
+{% call modal('leadDialog', 'NEW OPPORTUNITY', 'Add lead', url_for('pipeline'), 'Add lead') %}
+<div class="form-grid">
+  <div class="field"><label for="ld_c">Customer *</label><select id="ld_c" name="customer_id" required><option value="">Choose…</option>{% for c in customers %}<option value="{{ c.customer_id }}">{{ c.first_name }} {{ c.last_name }}</option>{% endfor %}</select></div>
+  <div class="field"><label for="ld_s">Service</label><select id="ld_s" name="service_id">{% for s in services %}<option value="{{ s.service_id }}">{{ s.service_name }} · {{ s.price|peso }}</option>{% endfor %}</select></div>
+  <div class="field"><label for="ld_a">Expected amount (₱) *</label><input id="ld_a" name="expected_amount" inputmode="decimal" required placeholder="e.g. 650"></div>
+  <div class="field"><label for="ld_d">Expected close date</label><input id="ld_d" type="date" name="expected_close_date"></div>
+</div>
+{% endcall %}
+{% endblock %}

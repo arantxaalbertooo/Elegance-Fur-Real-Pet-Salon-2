@@ -1,0 +1,12 @@
+{% extends "base.html" %}{% from "_macros.html" import head, bars, badge %}
+{% block body %}
+{% call head('Reports', 'Report 1 shows demand; Report 2 respects each customer’s contact consent.') %}<button class="btn secondary no-print" onclick="window.print()">Print report</button>{% endcall %}
+<h3 style="margin-bottom:12px">Report 1 · Popular services and busy days</h3>
+<div class="two-col">
+<section class="panel data-panel"><div class="table-scroll"><table><thead><tr><th>Service</th><th>Times booked</th><th>Revenue</th></tr></thead><tbody>{% for r in pop %}<tr><td><strong>{{ r.service_name }}</strong></td><td>{{ r.n }}</td><td>{{ r.revenue|peso }}</td></tr>{% else %}<tr><td colspan="3">No data yet.</td></tr>{% endfor %}</tbody></table></div></section>
+<section class="panel"><div class="panel-heading"><div><h3>Busiest days of the week</h3><p>Appointments, excluding canceled</p></div></div>{{ bars(busy, True) }}</section></div>
+<h3 style="margin:26px 0 6px">Report 2 · Contact list (consented customers only)</h3>
+<p class="panel-note">{{ skipped }} active customer(s) are left out because they have not agreed to be contacted.</p>
+<section class="panel data-panel"><div class="table-scroll"><table><thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Consent date</th></tr></thead><tbody>
+{% for c in contacts %}<tr><td><strong>{{ c.name }}</strong></td><td>{{ c.email }}</td><td>{{ c.phone or '—' }}</td><td>{{ c.consent_date or '—' }}</td></tr>{% else %}<tr><td colspan="4">No consented customers.</td></tr>{% endfor %}</tbody></table></div></section>
+{% endblock %}

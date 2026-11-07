@@ -1,0 +1,17 @@
+{% set h = hist.get(p.pet_id, []) if hist is defined else [] %}
+<article class="pet-card">
+  <div class="pet-card-head"><div class="pet-avatar" aria-hidden="true">{{ '🐱' if p.species == 'Cat' else '🐶' if p.species == 'Dog' else '🐾' }}</div>
+    <div><h3>{{ p.pet_name }}</h3><p>{{ p.breed or 'Breed not recorded' }}{% if p.owner %} · {% if is_desk %}<a href="{{ url_for('customer', cid=p.cid) }}">{{ p.owner }}</a>{% else %}{{ p.owner }}{% endif %}{% endif %}</p></div></div>
+  <div class="pet-facts"><div><small>COAT TYPE</small><strong>{{ p.coat_type or '—' }}</strong></div><div><small>SIZE / AGE</small><strong>{{ p.size or '—' }} · {{ p.age or "—" }}</strong></div></div>
+  {% if p.allergies and p.allergies|lower|trim not in ['none','none known',''] %}<div class="allergy-warning" role="note"><strong>⚠ ALLERGY / SENSITIVITY</strong>{{ p.allergies }}</div>
+  {% else %}<div class="notice-box" style="padding:9px">✓ Allergies: none recorded</div>{% endif %}
+  {% if p.medical_conditions %}<div class="note-box"><strong>Medical / special handling:</strong> {{ p.medical_conditions }}</div>{% endif %}
+  {% if p.behavior_notes %}<div class="note-box" style="border-color:#8fc4e3;background:#eef7fc;color:#2a5b7c"><strong>Behavior:</strong> {{ p.behavior_notes }}</div>{% endif %}
+  <p class="tiny muted" style="margin:12px 0 5px"><strong>Grooming preference:</strong> {{ p.grooming_preferences or 'Not recorded' }}</p>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:13px">
+    <button class="text-link" type="button" data-history="{{ p.pet_id }}" data-label="History ({{ h|length }})">History ({{ h|length }}) →</button>
+    {% if is_desk %}<button class="btn secondary small-btn" data-dialog="petDialog" data-title="Edit pet profile" data-values='{{ {"pet_id": p.pet_id, "customer_id": p.customer_id, "pet_name": p.pet_name, "species": p.species or "", "breed": p.breed or "", "age": p.age|agenum, "size": p.size or "", "coat_type": p.coat_type or "", "allergies": p.allergies or "", "medical_conditions": p.medical_conditions or "", "behavior_notes": p.behavior_notes or "", "grooming_preferences": p.grooming_preferences or ""}|tojson|forceescape }}'>Edit profile</button>{% endif %}
+  </div>
+  <div id="history-{{ p.pet_id }}" class="history-list hidden" style="margin-top:12px">{% for a in h %}<div class="history-row"><span class="history-dot"></span><div><strong>{{ a.svcs or 'Grooming session' }}</strong><p>{{ a.appointment_datetime|dlabel }} · {{ a.groomer or 'Groomer unassigned' }}{% if a.groomer_notes %} · {{ a.groomer_notes }}{% endif %}</p></div><small>{{ (a.total or 0)|peso }}</small></div>
+  {% else %}<p class="tiny muted">No completed grooming sessions yet.</p>{% endfor %}</div>
+</article>

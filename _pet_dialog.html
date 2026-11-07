@@ -1,0 +1,17 @@
+{% from "_macros.html" import modal %}
+{% call modal('petDialog', 'PET RECORD', 'Add pet profile', url_for('pet_save'), 'Save pet profile') %}
+<input type="hidden" name="pet_id" value="" data-clear><input type="hidden" name="next" value="{{ request.full_path.rstrip('?') }}">
+<div class="form-grid">
+  <div class="field"><label for="pt_o">Customer / owner *</label><select id="pt_o" name="customer_id" required>{% if customers is defined %}{% for x in customers %}<option value="{{ x.customer_id }}">{{ x.first_name }} {{ x.last_name }}</option>{% endfor %}{% else %}<option value="{{ c.customer_id }}">{{ c.first_name }} {{ c.last_name }}</option>{% endif %}</select></div>
+  <div class="field"><label for="pt_n">Pet name *</label><input id="pt_n" name="pet_name" required maxlength="60"></div>
+  <div class="field"><label for="pt_sp">Species</label><select id="pt_sp" name="species"><option>Dog</option><option>Cat</option><option>Other</option></select></div>
+  <div class="field"><label for="pt_b">Breed</label><input id="pt_b" name="breed" maxlength="80"></div>
+  <div class="field"><label for="pt_a">Age (years)</label><input id="pt_a" name="age" type="number" min="0" max="40"></div>
+  <div class="field"><label for="pt_s">Size</label><select id="pt_s" name="size"><option>Small</option><option>Medium</option><option>Large</option></select></div>
+  <div class="field span-2"><label for="pt_c">Coat type</label><input id="pt_c" name="coat_type" maxlength="60" placeholder="e.g. Short, fine · Double · Curly"></div>
+  <div class="field span-2"><label for="pt_al">Allergies <span class="required-note">highlighted for groomers</span></label><textarea id="pt_al" name="allergies" rows="2" placeholder="e.g. Latex; sensitive to scented shampoo. Leave empty if none."></textarea></div>
+  <div class="field span-2"><label for="pt_m">Medical conditions / special handling</label><textarea id="pt_m" name="medical_conditions" rows="2" placeholder="e.g. Arthritis (needs short sessions)"></textarea></div>
+  <div class="field span-2"><label for="pt_bh">Behavior notes</label><textarea id="pt_bh" name="behavior_notes" rows="2" placeholder="e.g. Anxious with strangers; nervous at nail trim"></textarea></div>
+  <div class="field span-2"><label for="pt_g">Grooming preferences</label><textarea id="pt_g" name="grooming_preferences" rows="2" placeholder="Preferred cut, shampoo, bathing instructions…"></textarea></div>
+</div>
+{% endcall %}

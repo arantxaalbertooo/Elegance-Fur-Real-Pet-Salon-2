@@ -1,0 +1,26 @@
+{% extends "base.html" %}{% from "_macros.html" import badge, empty, modal, head %}
+{% block body %}
+{% call head('Customer records', 'One owner record linked to one or more pet profiles, with contact consent and CLV segment.') %}
+<button class="btn primary" data-dialog="customerDialog" data-title="Add customer">＋ Add customer</button>
+{% endcall %}
+<form class="toolbar" method="get">
+  <div class="search-wrap"><input class="search-input" name="q" value="{{ s }}" placeholder="Search name, email, phone or address…" aria-label="Search customers"></div>
+  <select class="filter-select" name="segment" aria-label="Segment" data-autosubmit><option value="">All segments</option>{% for g in segments %}<option value="{{ g.segment_id }}" {{ 'selected' if seg == g.segment_id|string }}>{{ g.segment_name }}</option>{% endfor %}</select>
+  <select class="filter-select" name="show" aria-label="Status filter" data-autosubmit><option value="active" {{ 'selected' if show == 'active' }}>Active only</option><option value="all" {{ 'selected' if show == 'all' }}>Include deactivated</option></select>
+  <button class="btn secondary" type="submit">Filter</button>
+</form>
+<section class="panel data-panel"><div class="table-scroll"><table>
+<thead><tr><th>Customer</th><th>Contact</th><th>Segment</th><th>Pets</th><th>Visits</th><th>Consent</th><th>Status</th><th>Actions</th></tr></thead><tbody>
+{% for c in rows %}<tr>
+  <td><div class="person-cell"><div class="mini-avatar">{{ (c.first_name ~ ' ' ~ c.last_name)|initials }}</div><div><strong>{{ c.first_name }} {{ c.last_name }}</strong><small>{{ c.customer_id|code('CUS') }}</small></div></div></td>
+  <td>{{ c.phone or '—' }}<br><small>{{ c.email }}</small></td>
+  <td>{% if c.segment_name %}<span class="status-badge seg {{ c.segment_name|slug }}">{{ c.segment_name }}</span>{% endif %}</td>
+  <td>{{ c.npets }}</td><td>{{ c.visits }}</td>
+  <td>{% if c.consent_given %}{{ badge('Yes') }}<br><small>{{ c.consent_date }}</small>{% else %}{{ badge('No') }}{% endif %}</td>
+  <td>{{ badge('Active' if c.is_active else 'Inactive') }}</td>
+  <td><div class="table-actions"><a class="btn secondary small-btn" href="{{ url_for('customer', cid=c.customer_id) }}">Open</a>
+    <button class="btn secondary small-btn" data-dialog="customerDialog" data-title="Edit customer" data-action="{{ url_for('customer_save') }}" data-values='{{ {"customer_id": c.customer_id, "first_name": c.first_name, "last_name": c.last_name, "email": c.email, "phone": c.phone or "", "address": c.address or "", "consent_given": c.consent_given}|tojson|forceescape }}'>Edit</button></div></td>
+</tr>{% endfor %}</tbody></table></div>
+{% if not rows %}{{ empty('No customers found', 'Try another search term or filter.') }}{% endif %}</section>
+{% endblock %}
+{% block dialogs %}{% include "_customer_dialog.html" %}{% endblock %}

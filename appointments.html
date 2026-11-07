@@ -1,0 +1,81 @@
+{% extends "base.html" %}{% from "_macros.html" import badge, empty, modal, head, feedback_dialog, allergy_flag %}
+{% block body %}
+{% call head('Appointments & schedule', 'Search bookings, review statuses and spot scheduling conflicts. Completed appointments feed CLV.') %}
+{% if is_desk %}<button class="btn primary" data-dialog="apptDialog" data-title="New appointment" data-submit="Book appointment">＋ New appointment</button>{% endif %}
+{% endcall %}
+
+<form class="toolbar" method="get">
+  <input type="hidden" name="view" value="{{ view }}">{% if view == 'month' %}<input type="hidden" name="m" value="{{ month_start.strftime('%Y-%m') }}">{% endif %}
+  <div class="search-wrap"><input class="search-input" name="q" value="{{ f.q }}" placeholder="Search customer, pet, service, groomer or ID…" aria-label="Search appointments"></div>
+  <select class="filter-select" name="status" aria-label="Filter by status" data-autosubmit><option value="">All statuses</option>{% for s in statuses %}<option {{ 'selected' if f.status == s }}>{{ s }}</option>{% endfor %}</select>
+  {% if view == 'list' %}<input class="filter-select" type="date" name="date" value="{{ f.date }}" aria-label="Filter by date" data-autosubmit>{% endif %}
+  <button class="btn secondary" type="submit">Search</button>
+  <a class="btn secondary" href="{{ url_for('appointments', view=view) }}">Clear filters</a>
+  <div class="calendar-controls"><a class="btn {{ 'primary' if view == 'list' else 'secondary' }}" href="{{ url_for('appointments', view='list', q=f.q or None, status=f.status or None) }}">List</a><a class="btn {{ 'primary' if view == 'month' else 'secondary' }}" href="{{ url_for('appointments', view='month', q=f.q or None, status=f.status or None) }}">Month</a></div>
+</form>
+
+{% if view == 'month' %}
+<section class="panel"><div class="calendar-heading"><h3>{{ month_start.strftime('%B %Y') }}</h3>
+  <div class="calendar-controls"><a class="btn secondary small-btn" href="{{ url_for('appointments', view='month', m=prev_m, q=f.q or None, status=f.status or None) }}" aria-label="Previous month">←</a><a class="btn secondary small-btn" href="{{ url_for('appointments', view='month', q=f.q or None, status=f.status or None) }}">Today</a><a class="btn secondary small-btn" href="{{ url_for('appointments', view='month', m=next_m, q=f.q or None, status=f.status or None) }}" aria-label="Next month">→</a></div></div>
+  <div class="calendar-grid">{% for d in ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'] %}<div class="calendar-day-name">{{ d }}</div>{% endfor %}
+  {% for wk in weeks %}{% for d, inside, evs in wk %}<div class="calendar-day {{ '' if inside else 'outside' }} {{ 'today' if d.isoformat() == today }}"><div class="calendar-day-num">{{ d.day }}</div>
+    {% for a in evs[:3] %}<button type="button" class="calendar-event {{ 'warning' if a.status == 'In progress' else 'cancelled' if a.status == 'Canceled' }}" title="{{ a.pet_name or 'Pet' }} · {{ a.status }}"
+      {% if is_desk and a.status in ['Scheduled','In progress'] %}data-dialog="apptDialog" data-title="Edit appointment" data-submit="Save changes" data-action="{{ url_for('appt_save') }}" data-values='{{ {"appointment_id": a.appointment_id, "customer_id": a.customer_id, "pet_id": a.pet_id or "", "groomer_id": a.groomer_id or "", "date": a.appointment_datetime[:10], "time": a.appointment_datetime[11:16], "services": (a.svc_ids or "").split(","), "groomer_notes": a.groomer_notes or ""}|tojson|forceescape }}'
+      {% else %}data-dialog="statusDialog" data-title="Update {{ a.pet_name or 'appointment' }}" data-action="{{ url_for('appt_status', aid=a.appointment_id) }}" data-values='{{ {"status": a.status}|tojson|forceescape }}'{% endif %}>{{ a.appointment_datetime|tlabel }} {{ a.pet_name or 'Pet' }}</button>{% endfor %}
+    {% if evs|length > 3 %}<small>+{{ evs|length - 3 }} more</small>{% endif %}</div>{% endfor %}{% endfor %}</div>
+  <div class="calendar-legend"><span><i class="legend-dot"></i> Scheduled / completed</span><span><i class="legend-dot" style="background:#d38b2d"></i> In progress</span><span><i class="legend-dot" style="background:#c55b62"></i> Canceled</span></div>
+</section>
+{% else %}
+<section class="panel data-panel"><div class="table-scroll"><table>
+  <thead><tr><th>Order</th><th>When</th><th>Customer / pet</th><th>Services</th><th>Total</th><th>Groomer</th><th>Status</th><th>Actions</th></tr></thead><tbody>
+  {% for a in rows %}<tr>
+    <td><strong>{{ a.appointment_id|code('APT') }}</strong></td>
+    <td>{{ a.appointment_datetime|dlabel }}<br><small>{{ a.appointment_datetime|tlabel }}{% if a.minutes %} · {{ a.minutes }} min{% endif %}</small></td>
+    <td><div class="person-cell"><div class="mini-avatar">{{ (a.pet_name or a.cname)|initials }}</div><div><strong>{{ a.cname }}</strong><small>{{ a.pet_name or 'No pet on file' }}</small></div></div>{% if a.allergies %}<div style="margin-top:6px">{{ allergy_flag(a.allergies) }}</div>{% endif %}</td>
+    <td style="white-space:normal;min-width:150px">{{ a.svcs or '—' }}{% if a.groomer_notes %}<br><small title="{{ a.groomer_notes }}">📝 {{ a.groomer_notes[:48] }}{{ '…' if a.groomer_notes|length > 48 }}</small>{% endif %}</td>
+    <td><strong>{{ (a.total or 0)|peso }}</strong></td>
+    <td>{{ a.groomer or 'Unassigned' }}</td>
+    <td>{{ badge(a.status) }}</td>
+    <td><div class="table-actions">
+      {% if is_desk and a.status in ['Scheduled','In progress'] %}<button class="btn secondary small-btn" data-dialog="apptDialog" data-title="Edit appointment" data-submit="Save changes" data-action="{{ url_for('appt_save') }}" data-values='{{ {"appointment_id": a.appointment_id, "customer_id": a.customer_id, "pet_id": a.pet_id or "", "groomer_id": a.groomer_id or "", "date": a.appointment_datetime[:10], "time": a.appointment_datetime[11:16], "services": (a.svc_ids or "").split(","), "groomer_notes": a.groomer_notes or ""}|tojson|forceescape }}'>Edit</button>{% endif %}
+      {% if session.role == 'Groomer' %}
+        {% if a.status == 'Scheduled' %}<form class="inline-form" method="post" action="{{ url_for('appt_status', aid=a.appointment_id) }}"><input type="hidden" name="status" value="In progress"><button class="btn primary small-btn">Start</button></form>{% endif %}
+        {% if a.status == 'In progress' %}<button class="btn primary small-btn" data-dialog="statusDialog" data-title="Complete {{ a.pet_name or 'appointment' }}" data-submit="Mark completed" data-action="{{ url_for('appt_status', aid=a.appointment_id) }}" data-values='{{ {"status": "Completed"}|tojson|forceescape }}'>Complete</button>{% endif %}
+      {% else %}<button class="btn secondary small-btn" data-dialog="statusDialog" data-title="Update {{ a.pet_name or 'appointment' }}" data-action="{{ url_for('appt_status', aid=a.appointment_id) }}" data-values='{{ {"status": a.status}|tojson|forceescape }}'>Status</button>{% endif %}
+      {% if is_desk and a.status == 'Completed' and not a.has_fb %}<button class="btn secondary small-btn" data-dialog="feedbackDialog" data-action="{{ url_for('appt_feedback', aid=a.appointment_id) }}">Rate</button>{% endif %}
+    </div></td></tr>
+  {% endfor %}</tbody></table></div>
+  {% if not rows %}{{ empty('No appointments found', 'Try another search, or book a new appointment.', '▤') }}{% endif %}
+</section>
+{% endif %}
+
+{% if is_desk %}<section class="panel mt"><div class="panel-heading"><div><h3>Pending reminders</h3><p>Upcoming-visit reminders and follow-ups. Customers without contact consent must not be contacted.</p></div></div>
+  <div class="table-scroll"><table><thead><tr><th>Customer</th><th>Type</th><th>Send at</th><th>Consent</th><th></th></tr></thead><tbody>
+  {% for r in due %}<tr><td><strong>{{ r.cname }}</strong></td><td>{{ r.reminder_type }}</td><td>{{ r.scheduled_at|dtlabel }}</td>
+    <td>{{ badge('Yes' if r.consent_given else 'No') }}</td>
+    <td><form class="inline-form" method="post" action="{{ url_for('reminder_sent', rid=r.reminder_id) }}"><button class="btn secondary small-btn">Mark sent</button></form></td></tr>
+  {% else %}<tr><td colspan="5">No pending reminders.</td></tr>{% endfor %}</tbody></table></div></section>{% endif %}
+{% endblock %}
+
+{% block dialogs %}
+{% if is_desk %}
+{% call modal('apptDialog', 'BOOKING DETAILS', 'New appointment', url_for('appt_save'), 'Book appointment') %}
+<input type="hidden" name="appointment_id" value="" data-clear>
+<div class="form-grid">
+  <div class="field"><label for="ap_c">Customer *</label><select id="ap_c" name="customer_id" required>{% for c in customers %}<option value="{{ c.customer_id }}">{{ c.first_name }} {{ c.last_name }}</option>{% endfor %}</select></div>
+  <div class="field"><label for="ap_p">Pet</label><select id="ap_p" name="pet_id"><option value="">— no pet on file —</option>{% for p in pets %}<option value="{{ p.pet_id }}" data-c="{{ p.customer_id }}">{{ p.pet_name }}</option>{% endfor %}</select></div>
+  <div class="field"><label for="ap_g">Assigned groomer *</label><select id="ap_g" name="groomer_id" required>{% for g in groomers %}<option value="{{ g.user_id }}">{{ g.full_name }}</option>{% endfor %}</select></div>
+  <div class="field"><label for="ap_d">Date *</label><input id="ap_d" type="date" name="date" required></div>
+  <div class="field"><label for="ap_t">Start time * <span class="hint">8:00 AM – 6:00 PM</span></label><input id="ap_t" type="time" name="time" required min="08:00" max="18:00" step="900" value="09:00"></div>
+  <div class="field span-2"><label>Services * <span class="hint">Pick one or more</span></label><div class="checks">{% for s in services %}<label class="check"><input type="checkbox" name="services" value="{{ s.service_id }}" data-price="{{ s.price|int }}" data-min="{{ s.duration_minutes }}"><span>{{ s.service_name }} <small>· {{ s.duration_minutes }} min</small></span><strong>{{ s.price|peso }}</strong></label>{% endfor %}</div><div id="bookingTotal" class="booking-total">Choose at least one service.</div></div>
+  <div class="field span-2"><label for="ap_n">Special handling / grooming notes</label><textarea id="ap_n" name="groomer_notes" rows="2" maxlength="300" placeholder="Anything the groomer should know…"></textarea></div>
+</div>
+{% endcall %}
+{% endif %}
+{% call modal('statusDialog', 'APPOINTMENT STATUS', 'Update status', '', 'Save status') %}
+<div class="form-grid"><div class="field span-2"><label for="st_s">Status</label><select id="st_s" name="status" required>{% for s in (['In progress','Completed'] if session.role == 'Groomer' else statuses) %}<option>{{ s }}</option>{% endfor %}</select></div>
+<div class="field span-2"><label for="st_n">Groomer notes (optional)</label><textarea id="st_n" name="notes" rows="3" maxlength="300" placeholder="How did the session go? Anything for the next visit?"></textarea></div></div>
+<p class="tiny muted" style="margin:12px 0 0">Completing an appointment adds to the customer's CLV and prepares a follow-up reminder.</p>
+{% endcall %}
+{% if is_desk %}{{ feedback_dialog() }}{% endif %}
+{% endblock %}

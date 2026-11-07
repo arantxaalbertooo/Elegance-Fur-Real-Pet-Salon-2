@@ -1,0 +1,30 @@
+{% extends "base.html" %}{% from "_macros.html" import head, badge, modal, empty %}
+{% block body %}
+{% call head('Tickets & interactions', 'Log every contact. Open a ticket for problems, assign it, and record a 1–5 satisfaction score when closing.') %}
+<button class="btn secondary" data-dialog="interactionDialog">＋ Log interaction</button><button class="btn primary" data-dialog="ticketDialog">＋ Open ticket</button>{% endcall %}
+<section class="panel data-panel"><div class="panel-heading" style="padding:19px 19px 0"><div><h3>Tickets</h3><p>{{ 'All tickets' if show == 'all' else 'Open and in-progress tickets' }}</p></div><a class="btn secondary small-btn" href="?show={{ 'open' if show == 'all' else 'all' }}">{{ 'Show open only' if show == 'all' else 'Show closed too' }}</a></div>
+<div class="table-scroll"><table><thead><tr><th>Ticket</th><th>Customer</th><th>Subject</th><th>Priority</th><th>Status</th><th>Assigned</th><th>Action</th></tr></thead><tbody>
+{% for t in tickets %}<tr><td><strong>{{ t.ticket_id|code('TKT') }}</strong><br><small>{{ t.opened_at|dlabel }}</small></td><td>{{ t.cname }}</td><td style="white-space:normal;min-width:180px">{{ t.subject }}</td><td>{{ badge(t.priority) }}</td><td>{{ badge(t.status) }}</td><td>{{ t.agent or '—' }}</td>
+<td>{% if t.status == 'Closed' %}<strong>Score {{ t.csat_score }}/5</strong>{% else %}<div class="table-actions">
+<form class="inline-form" method="post" action="{{ url_for('ticket_assign', tid=t.ticket_id) }}"><select name="assigned_to" aria-label="Assign ticket">{% for u in staff %}<option value="{{ u.user_id }}" {{ 'selected' if u.user_id == t.assigned_to }}>{{ u.full_name }}</option>{% endfor %}</select><button class="btn secondary small-btn">Assign</button></form>
+<button class="btn primary small-btn" data-dialog="closeDialog" data-action="{{ url_for('ticket_close', tid=t.ticket_id) }}" data-title="Close {{ t.ticket_id|code('TKT') }}">Close</button></div>{% endif %}</td></tr>
+{% else %}<tr><td colspan="7">No tickets.</td></tr>{% endfor %}</tbody></table></div></section>
+<section class="panel data-panel mt"><div class="panel-heading" style="padding:19px 19px 0"><div><h3>Recent interactions</h3><p>Latest 15 contacts logged by staff</p></div></div>
+<div class="table-scroll"><table><thead><tr><th>Date</th><th>Customer</th><th>Channel</th><th>Notes</th><th>Reference</th><th>By</th></tr></thead><tbody>
+{% for i in ints %}<tr><td>{{ i.interaction_date|dtlabel }}</td><td><strong>{{ i.cname }}</strong></td><td>{{ i.channel }}</td><td style="white-space:normal;min-width:220px">{{ i.notes }}</td><td>{% if i.related_ref %}<span class="chip">{{ i.related_ref }}</span>{% endif %}</td><td>{{ i.full_name or '—' }}</td></tr>
+{% else %}<tr><td colspan="6">No interactions logged.</td></tr>{% endfor %}</tbody></table></div></section>
+{% endblock %}
+{% block dialogs %}
+{% call modal('ticketDialog', 'SERVICE TICKET', 'Open ticket', url_for('ticket_new'), 'Open ticket') %}
+<div class="form-grid">
+  <div class="field span-2"><label for="tk_c">Customer *</label><select id="tk_c" name="customer_id" required><option value="">Choose…</option>{% for c in customers %}<option value="{{ c.customer_id }}">{{ c.first_name }} {{ c.last_name }}</option>{% endfor %}</select></div>
+  <div class="field span-2"><label for="tk_s">Subject *</label><input id="tk_s" name="subject" required maxlength="150"></div>
+  <div class="field"><label for="tk_p">Priority</label><select id="tk_p" name="priority"><option>Medium</option><option>High</option><option>Low</option></select></div>
+  <div class="field"><label for="tk_a">Assign to</label><select id="tk_a" name="assigned_to"><option value="">Unassigned</option>{% for u in staff %}<option value="{{ u.user_id }}">{{ u.full_name }}</option>{% endfor %}</select></div>
+</div>
+{% endcall %}
+{% call modal('closeDialog', 'SERVICE TICKET', 'Close ticket', '', 'Close ticket') %}
+<div class="form-grid"><div class="field span-2"><label for="cl_s">Customer satisfaction score *</label><select id="cl_s" name="csat_score" required><option value="">Choose…</option>{% for n in [5,4,3,2,1] %}<option value="{{ n }}">{{ n }} — {{ ['','Very unhappy','Unhappy','Okay','Happy','Very happy'][n] }}</option>{% endfor %}</select></div></div>
+{% endcall %}
+{% include "_interaction_dialog.html" %}
+{% endblock %}

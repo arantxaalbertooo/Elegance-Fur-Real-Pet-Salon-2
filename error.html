@@ -1,0 +1,3 @@
+{% extends "base.html" %}{% block title %}Not available{% endblock %}
+{% block shell %}{% if session.uid %}{{ super() }}{% else %}<main class="login-shell" style="display:block"><div class="access-denied"><div class="empty-icon">🐾</div><h2>Not available</h2><p>{{ msg }}</p><a class="btn primary" href="{{ url_for('login') }}">Go to sign in</a></div></main>{% endif %}{% endblock %}
+{% block body %}<div class="access-denied"><div class="empty-icon">🐾</div><h2>Not available</h2><p>{{ msg }}</p><a class="btn primary" href="{{ url_for('dashboard') }}">Back to dashboard</a></div>{% endblock %}

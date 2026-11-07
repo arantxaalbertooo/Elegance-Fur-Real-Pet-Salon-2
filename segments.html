@@ -1,0 +1,16 @@
+{% extends "base.html" %}{% from "_macros.html" import head, bars, badge %}
+{% block body %}
+{% call head('Segmentation & CLV', 'CLV = total price charged on a customer’s Completed appointments. A customer joins the highest segment whose minimum CLV they reach.') %}{% endcall %}
+<form method="post"><div class="two-col">
+<section class="panel data-panel"><div class="panel-heading" style="padding:19px 19px 0"><div><h3>Segment rules</h3><p>{{ 'Admins can change the minimum CLV for each segment.' if is_admin else 'Only an Admin can change the rules; you can recalculate.' }}</p></div></div>
+<div class="table-scroll"><table><thead><tr><th>Segment</th><th>Minimum CLV</th><th>Customers</th><th>Meaning</th></tr></thead><tbody>
+{% for s in counts %}<tr><td><span class="status-badge seg {{ s.segment_name|slug }}">{{ s.segment_name }}</span></td>
+<td>{% if is_admin %}<div class="inline-form">₱ <input name="min_{{ s.segment_id }}" value="{{ s.min_clv|int }}" inputmode="numeric" style="width:100px" aria-label="Minimum CLV for {{ s.segment_name }}"></div>{% else %}{{ s.min_clv|peso }}{% endif %}</td>
+<td><strong>{{ s.n }}</strong></td><td style="white-space:normal">{{ s.description }}</td></tr>{% endfor %}</tbody></table></div>
+<div style="padding:16px 19px"><button class="btn primary">{{ 'Save rules & recalculate' if is_admin else 'Recalculate segments' }}</button></div></section>
+<section class="panel"><div class="panel-heading"><div><h3>Customers per segment</h3><p>Current distribution</p></div></div>{{ bars(seg_bars) }}</section>
+</div></form>
+<section class="panel data-panel mt"><div class="panel-heading" style="padding:19px 19px 0"><div><h3>Customers by CLV</h3><p>Highest lifetime value first</p></div></div>
+<div class="table-scroll"><table><thead><tr><th>Customer</th><th>Visits</th><th>CLV</th><th>Segment</th></tr></thead><tbody>
+{% for r in rows %}<tr><td><div class="person-cell"><div class="mini-avatar">{{ r.name|initials }}</div><div><strong><a href="{{ url_for('customer', cid=r.customer_id) }}" style="text-decoration:none">{{ r.name }}</a></strong><small>{{ r.customer_id|code('CUS') }}</small></div></div></td><td>{{ r.visits }}</td><td><strong>{{ r.clv|peso }}</strong></td><td><span class="status-badge seg {{ r.segment_name|slug }}">{{ r.segment_name }}</span></td></tr>{% endfor %}</tbody></table></div></section>
+{% endblock %}

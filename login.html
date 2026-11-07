@@ -1,0 +1,28 @@
+{% extends "base.html" %}{% block title %}Sign in{% endblock %}
+{% block shell %}
+<main class="login-shell">
+  <section class="login-brand" aria-label="Salon introduction">
+    <div class="brand-mark">✦</div><p class="eyebrow" style="color:#a9c9d6">PET SALON MANAGEMENT</p>
+    <h1>Elegance Fur Real</h1><p class="muted-light">A calmer, smarter way to care for every pet.</p>
+    <div class="login-feature-list">
+      <div><span>✓</span> Appointment and schedule management</div>
+      <div><span>✓</span> Customer segments, pipeline and service tickets</div>
+      <div><span>✓</span> Clear grooming and allergy notes</div>
+    </div>
+  </section>
+  <section class="login-panel">
+    <div class="mobile-brand"><span class="brand-mark small">✦</span><strong>Elegance Fur Real</strong></div>
+    <p class="eyebrow">WELCOME BACK</p><h2>Sign in to your workspace</h2>
+    <p class="muted">Sign in with an authorized salon account. Customers do not log in; the front desk manages customer and pet records.</p>
+    <form class="stack-form" method="post">
+      <label for="loginEmail">Email or username</label>
+      <input id="loginEmail" name="email" type="text" autocomplete="username" required autofocus placeholder="name@salon.com or username" value="{{ request.form.email }}">
+      <label for="loginPassword">Password</label>
+      <div class="password-wrap"><input id="loginPassword" name="password" type="password" autocomplete="current-password" required placeholder="Enter password"><button id="togglePassword" class="password-toggle" type="button" aria-label="Show password">Show</button></div>
+      <button class="btn primary full" type="submit">Sign in <span aria-hidden="true">→</span></button>
+      {% for cat, msg in get_flashed_messages(with_categories=true) %}<p class="form-error" role="alert">{{ msg }}</p>{% endfor %}
+    </form>
+    <p class="tiny muted privacy-note">Only Admin, Receptionist, and Groomer accounts can sign in. Customers are records managed by salon staff.</p>
+  </section>
+</main>
+{% endblock %}

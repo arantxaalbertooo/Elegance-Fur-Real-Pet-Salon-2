@@ -1,0 +1,19 @@
+{% extends "base.html" %}{% from "_macros.html" import head, badge, modal %}
+{% block body %}
+{% call head('Staff accounts', 'Admin only. Create, disable or re-enable employee accounts. Passwords are stored as hashes.') %}<button class="btn primary" data-dialog="userDialog">＋ Create staff account</button>{% endcall %}
+<div class="staff-list">{% for u in rows %}<div class="staff-row {{ '' if u.is_active else 'disabled-account' }}">
+  <div class="staff-info"><div class="avatar">{{ u.full_name|initials }}</div><div><strong>{{ u.full_name }} {% if u.staff_code %}<span class="chip">{{ u.staff_code }}</span>{% endif %}</strong><small>{{ u.email }} · {{ u.role }}{% if u.specialty %} · {{ u.specialty }}{% endif %}{% if u.availability %} · {{ u.availability }}{% endif %}{% if u.rating %} · ★ {{ u.rating }}{% endif %}</small></div></div>
+  <div class="account-actions">{{ badge('Active' if u.is_active else 'Inactive') }}
+    {% if u.user_id != session.uid %}<form method="post" action="{{ url_for('user_toggle', uid=u.user_id) }}" data-confirm="{{ 'Disable' if u.is_active else 'Re-enable' }} this account?"><button class="btn {{ 'danger' if u.is_active else 'secondary' }} small-btn">{{ 'Disable' if u.is_active else 'Enable' }}</button></form>{% else %}<span class="tiny muted">You</span>{% endif %}</div></div>{% endfor %}</div>
+{% endblock %}
+{% block dialogs %}
+{% call modal('userDialog', 'ADMINISTRATION', 'Create staff account', url_for('users'), 'Create account') %}
+<div class="form-grid">
+  <div class="field span-2"><label for="us_n">Full name *</label><input id="us_n" name="full_name" required maxlength="100"></div>
+  <div class="field span-2"><label for="us_e">Email address *</label><input id="us_e" name="email" type="email" required maxlength="120"></div>
+  <div class="field"><label for="us_r">Role *</label><select id="us_r" name="role"><option>Receptionist</option><option>Groomer</option><option>Admin</option></select></div>
+  <div class="field"><label for="us_p">Phone</label><input id="us_p" name="phone" maxlength="20"></div>
+  <div class="field span-2"><label for="us_pw">Temporary password * <span class="hint">at least 8 characters</span></label><input id="us_pw" name="password" type="password" required minlength="8" autocomplete="new-password"></div>
+</div>
+{% endcall %}
+{% endblock %}

@@ -1,0 +1,33 @@
+{% macro badge(text, extra='') %}<span class="status-badge {{ text|slug }} {{ extra }}">{{ text }}</span>{% endmacro %}
+
+{% macro head(title, desc) %}<div class="section-title"><div><h2>{{ title }}</h2><p>{{ desc }}</p></div><div class="section-actions">{{ caller() if caller }}</div></div>{% endmacro %}
+
+{% macro empty(title, desc, icon='⌕') %}<div class="empty-state"><div class="empty-icon">{{ icon }}</div><strong>{{ title }}</strong><p>{{ desc }}</p></div>{% endmacro %}
+
+{% macro stat(label, value, icon, foot) %}<div class="stat-card"><div class="stat-top"><span>{{ label }}</span><span class="stat-icon" aria-hidden="true">{{ icon }}</span></div><div class="stat-value">{{ value }}</div><div class="stat-foot">{{ foot }}</div></div>{% endmacro %}
+
+{% macro bars(rows, alt=False) %}{% set ns = namespace(mx=1) %}{% for r in rows %}{% if r[1] > ns.mx %}{% set ns.mx = r[1] %}{% endif %}{% endfor %}
+<div class="bar-list">{% for r in rows %}<div class="bar-row"><span class="label" title="{{ r[0] }}">{{ r[0] }}</span><div class="bar-track"><div class="bar-fill {{ 'alt' if alt }}" style="width:{{ (100 * r[1] / ns.mx)|round|int }}%"></div></div><span class="val">{{ r[1] }}</span></div>{% else %}<p class="muted tiny">Nothing to show yet.</p>{% endfor %}</div>{% endmacro %}
+
+{# A pop-up form. The trigger button sets data-dialog="<id>" and can pass data-action, data-title and data-values (JSON) to pre-fill it. #}
+{% macro modal(id, eyebrow, title, action, submit='Save') %}
+<dialog id="{{ id }}" class="modal"><form method="post" action="{{ action }}" class="modal-form">
+<div class="modal-heading"><div><p class="eyebrow">{{ eyebrow }}</p><h2 data-title>{{ title }}</h2></div><button class="icon-btn" type="button" data-close-dialog aria-label="Close">×</button></div>
+{{ caller() }}
+<div class="modal-actions"><button type="button" class="btn secondary" data-close-dialog>Cancel</button><button type="submit" class="btn primary">{{ submit }}</button></div>
+</form></dialog>
+{% endmacro %}
+
+{# the feedback dialog is shared by the appointments, feedback and customer pages #}
+{% macro feedback_dialog() %}
+{% call modal('feedbackDialog', 'CUSTOMER FEEDBACK', 'Record feedback', '', 'Save feedback') %}
+<div class="form-grid">
+<div class="field"><label>Grooming quality</label><select name="grooming_rating" required>{% for n in [5,4,3,2,1] %}<option value="{{ n }}">{{ n }} — {{ ['','Poor','Fair','Good','Very good','Excellent'][n] }}</option>{% endfor %}</select></div>
+<div class="field"><label>Service / front desk</label><select name="service_rating" required>{% for n in [5,4,3,2,1] %}<option value="{{ n }}">{{ n }} — {{ ['','Poor','Fair','Good','Very good','Excellent'][n] }}</option>{% endfor %}</select></div>
+<div class="field span-2"><label>Comments (optional)</label><textarea name="comments" rows="3" maxlength="500" placeholder="What did the owner say?"></textarea></div>
+</div>
+{% endcall %}
+{% endmacro %}
+
+{# allergy / sensitivity warning used on pet cards and appointment rows #}
+{% macro allergy_flag(a) %}{% if a and a|lower|trim not in ['none','none known',''] %}<span class="status-badge high" title="Allergy / sensitivity">⚠ {{ a }}</span>{% endif %}{% endmacro %}

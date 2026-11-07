@@ -1,0 +1,12 @@
+{% from "_macros.html" import modal %}
+{% call modal('customerDialog', 'CUSTOMER RECORD', 'Add customer', url_for('customer_save'), 'Save customer') %}
+<input type="hidden" name="customer_id" value="" data-clear>
+<div class="form-grid">
+  <div class="field"><label for="cu_f">First name *</label><input id="cu_f" name="first_name" required maxlength="60"></div>
+  <div class="field"><label for="cu_l">Last name *</label><input id="cu_l" name="last_name" required maxlength="60"></div>
+  <div class="field"><label for="cu_e">Email address *</label><input id="cu_e" name="email" type="email" required maxlength="120"></div>
+  <div class="field"><label for="cu_p">Phone number</label><input id="cu_p" name="phone" type="tel" maxlength="20"></div>
+  <div class="field span-2"><label for="cu_a">Address</label><input id="cu_a" name="address" maxlength="160"></div>
+  <div class="field span-2"><label class="check consent"><input type="checkbox" name="consent_given" value="1"><span>Customer agreed to be contacted (reminders and follow-ups). Customers without consent are left out of contact lists.</span></label></div>
+</div>
+{% endcall %}

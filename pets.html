@@ -1,0 +1,10 @@
+{% extends "base.html" %}{% from "_macros.html" import empty, head %}
+{% block body %}
+{% call head('Pet profiles', 'Linked owner records, allergies, handling notes, grooming preferences and visit history.') %}
+{% if is_desk %}<button class="btn primary" data-dialog="petDialog" data-title="Add pet profile">＋ Add pet profile</button>{% endif %}
+{% endcall %}
+<form class="toolbar" method="get"><div class="search-wrap"><input class="search-input" name="q" value="{{ s }}" placeholder="Search pet, breed, owner or allergy…" aria-label="Search pet profiles"></div><button class="btn secondary">Search</button>{% if s %}<a class="btn secondary" href="{{ url_for('pets') }}">Clear</a>{% endif %}</form>
+<div class="pet-grid">{% for p in rows %}{% include "_pet_card.html" %}{% endfor %}</div>
+{% if not rows %}{{ empty('No pet profiles found', 'Add a pet or change the search term.', '🐾') }}{% endif %}
+{% endblock %}
+{% block dialogs %}{% if is_desk %}{% include "_pet_dialog.html" %}{% endif %}{% endblock %}

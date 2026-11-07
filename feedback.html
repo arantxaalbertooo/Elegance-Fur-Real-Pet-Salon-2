@@ -1,0 +1,12 @@
+{% extends "base.html" %}{% from "_macros.html" import head, empty, stat, feedback_dialog %}
+{% block body %}
+{% call head('Customer feedback', 'Ratings recorded after completed grooming sessions. Admin, Receptionist and Groomer can read them.') %}{% endcall %}
+<div class="stats-grid">{{ stat('Feedback received', rows|length, '♡', 'All recorded submissions') }}{{ stat('Average grooming rating', ('%.1f / 5' % avg_groom) if avg_groom else '—', '★', 'Quality of the grooming') }}{{ stat('Average service rating', ('%.1f / 5' % avg_service) if avg_service else '—', '★', 'Front desk and service') }}{{ stat('Waiting for feedback', pending|length if is_desk else '—', '◷', 'Completed, not yet rated') }}</div>
+{% if is_desk and pending %}<section class="panel" style="margin-bottom:18px"><div class="panel-heading"><div><h3>Completed appointments without feedback</h3><p>Ask the owner how it went, then record the rating.</p></div></div>
+<div class="appointment-list">{% for a in pending %}<div class="appointment-item" style="grid-template-columns:90px minmax(0,1fr) auto"><div class="time-block"><strong>{{ a.appointment_id|code('APT') }}</strong><span>{{ a.appointment_datetime[:10] }}</span></div><div class="appointment-main"><strong>{{ a.pet_name or 'No pet' }} · {{ a.svcs }}</strong><span>{{ a.cname }} · {{ a.groomer or 'Unassigned' }}</span></div><button class="btn secondary small-btn" data-dialog="feedbackDialog" data-action="{{ url_for('appt_feedback', aid=a.appointment_id) }}">Record feedback</button></div>{% endfor %}</div></section>{% endif %}
+<div class="pet-grid">{% for f in rows %}<article class="pet-card"><div class="pet-card-head"><div class="pet-avatar">♡</div><div><h3>{{ f.cname }}</h3><p>{{ f.created_at[:10] }} · {{ f.pet_name or 'Pet' }} · {{ f.appointment_id|code('APT') }}</p></div></div>
+  <div class="stars" aria-label="Grooming {{ f.grooming_rating }} out of 5">{{ f.grooming_rating|stars }}</div><p class="tiny muted" style="margin:2px 0 0">Grooming · service: {{ f.service_rating|stars }}</p>
+  <p style="font-size:12px;line-height:1.6;color:#536c7b;margin:12px 0 6px">{{ ('“' ~ f.comments ~ '”') if f.comments else 'No written comment.' }}</p><p class="tiny muted" style="margin:0">{{ f.svcs }} · {{ f.groomer or '' }}</p></article>{% endfor %}</div>
+{% if not rows %}{{ empty('No feedback yet', 'Ratings appear here after completed appointments are rated.', '♡') }}{% endif %}
+{% endblock %}
+{% block dialogs %}{% if is_desk %}{{ feedback_dialog() }}{% endif %}{% endblock %}

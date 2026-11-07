@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% from "_macros.html" import head, empty %}
+{% block body %}
+{% call head('Grooming services', 'Browse services with their estimated time and price.') %}{% endcall %}
+<div class="pet-grid">{% for s in rows %}<article class="pet-card"><div class="pet-card-head"><div class="pet-avatar" aria-hidden="true">✦</div><div><h3>{{ s.service_name }}</h3><p>{{ s.description }}</p></div></div>
+  <div class="stat-value" style="font-size:24px;margin:10px 0">{{ s.price|peso }}</div>
+  <p class="muted" style="font-size:11px">Estimated duration: {{ s.duration_minutes }} minutes · booked {{ s.booked }} time{{ '' if s.booked == 1 else 's' }}</p>
+  {% if is_desk %}<a class="btn primary" style="width:100%" href="{{ url_for('appointments', open='apptDialog', service=s.service_id) }}">Book this service</a>{% endif %}</article>{% endfor %}</div>
+{% if not rows %}{{ empty('No services yet', 'Services will appear here.', '✦') }}{% endif %}
+{% endblock %}
