@@ -1,0 +1,16 @@
+﻿interaction_id,customer_id,customer_name,user_id,channel,notes,interaction_date,related_ref
+INT-001,CUS-018,Denise Pascual,REC-003,Email,Owner sent photos of redness after the bath. Ticket opened.,2026-06-02 15:00,TKT-006
+INT-002,CUS-024,Jasmine Manalo,REC-002,Call,Owner called upset that the cut was shorter than requested. Ticket opened.,2026-09-15 10:00,TKT-009
+INT-003,CUS-026,Lorenzo Reyes,REC-002,Walk-in,Owner reported a missing bandana. Ticket opened.,2026-10-05 11:00,TKT-002
+INT-004,CUS-005,Kiel Hernandez,REC-001,Walk-in,Decided not to proceed with Bath & Blow Dry: price higher than expected.,2026-10-12 16:00,OPP-004
+INT-005,CUS-006,Rhea Alvarez,ADM-001,Call,Owner questioned the amount charged versus the quote. Ticket opened.,2026-10-19 16:00,TKT-007
+INT-006,CUS-013,Charlene Santos,REC-002,Walk-in,Owner asked to rebook the missed slot. Ticket opened.,2026-10-21 11:00,TKT-001
+INT-007,CUS-042,Nathan Corpuz,REC-001,Walk-in,Asked about Spa Package for Oreo; interested but no date yet.,2026-10-23 13:00,OPP-005
+INT-008,CUS-016,Paolo Valdez,REC-001,Chat,Confirmed budget and preferred weekday for Ear Cleaning (Lucy).,2026-10-24 12:00,OPP-007
+INT-009,CUS-003,Migs Mendoza,REC-003,Chat,Sent price quote for Full Haircut: ₱650. Waiting for reply.,2026-10-27 11:00,OPP-009
+INT-010,CUS-039,Miguel Evangelista,REC-001,Chat,Agreed to book Bath & Blow Dry for Muffin on 2026-10-31.,2026-10-27 16:30,OPP-001
+INT-011,CUS-045,Lara Manalo,REC-002,Walk-in,Owner complained the pickup was 45 minutes late. Apologized and opened a ticket.,2026-10-28 17:00,TKT-003
+INT-012,CUS-011,Rafael Torres,REC-001,Call,Owner called about the allergy note not being followed. Escalated to the admin.,2026-10-29 10:30,TKT-004
+INT-013,CUS-049,Ivan Fernandez,REC-003,Email,Owner asked for a copy of the grooming notes. Sent by email.,2026-10-30 14:00,TKT-005
+INT-014,CUS-040,Aiza Mendoza,REC-003,Chat,Owner said no appointment reminder was received. Checked and apologized.,2026-10-31 09:30,TKT-008
+INT-015,CUS-010,Maria Del Rosario,ADM-001,Call,Owner reported ear redness after cleaning. Advised a vet check and opened a ticket.,2026-11-02 11:00,TKT-010

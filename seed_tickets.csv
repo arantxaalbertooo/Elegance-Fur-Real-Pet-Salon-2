@@ -1,0 +1,11 @@
+﻿ticket_id,customer_id,customer_name,assigned_to,subject,priority,status,csat_score,opened_at,closed_at
+TKT-001,CUS-013,Charlene Santos,REC-002,Rebook a missed appointment,Low,Closed,5,2026-10-21 11:00,2026-10-21 16:00
+TKT-002,CUS-026,Lorenzo Reyes,REC-002,Bandana missing after grooming,Low,Closed,5,2026-10-05 11:00,2026-10-06 14:00
+TKT-003,CUS-045,Lara Manalo,ADM-001,Pickup was delayed by 45 minutes,Medium,Closed,5,2026-10-14 12:00,2026-10-14 14:00
+TKT-004,CUS-011,Rafael Torres,ADM-001,Groomer note about allergy not followed,High,Closed,4,2026-10-11 09:00,2026-10-13 17:00
+TKT-005,CUS-049,Ivan Fernandez,REC-001,Request copy of grooming notes,Low,Closed,5,2026-10-06 09:00,2026-10-08 14:00
+TKT-006,CUS-018,Denise Pascual,REC-003,Skin redness after bath,High,In progress,,2026-06-02 15:00,
+TKT-007,CUS-006,Rhea Alvarez,ADM-001,Charged a different price than quoted,Medium,In progress,,2026-10-19 16:00,
+TKT-008,CUS-040,Aiza Mendoza,REC-001,Did not receive appointment reminder,Medium,In progress,,2026-07-08 10:00,
+TKT-009,CUS-024,Jasmine Manalo,,Haircut shorter than requested,High,Open,,2026-09-15 10:00,
+TKT-010,CUS-010,Maria Del Rosario,,Ear redness after cleaning,High,Open,,2026-08-13 09:00,

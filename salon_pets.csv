@@ -1,0 +1,51 @@
+﻿pet_id,customer_id,owner_name,pet_name,species,breed,age_years,size,coat_type,allergies,medical_conditions,grooming_preferences,behavior_notes,visit_count,last_visit
+PET-001,CUS-001,Daniel Lim,Bubbles,Cat,Siamese,8,Small,"Short, fine",None,Dental disease,Hypoallergenic shampoo only,Anxious with strangers,3,2026-10-02
+PET-002,CUS-002,Mica Zamora,Biscotti,Cat,Siamese,6,Small,"Short, fine",None,Anxiety,Bath and blow dry,Anxious with strangers,0,
+PET-003,CUS-003,Migs Mendoza,Simba,Cat,Ragdoll,1,Large,Semi-long,None,None,Hypoallergenic shampoo only,Needs breaks every 15 minutes,7,2026-08-31
+PET-004,CUS-004,Nicole Cortez,Neko,Cat,Exotic Shorthair,9,Medium,"Short, plush",None,Arthritis (needs short sessions),Lion cut,Anxious with strangers,2,2026-09-21
+PET-005,CUS-005,Kiel Hernandez,Luna,Dog,Labrador Retriever,10,Large,"Short, dense",None,Hip dysplasia,Breed-standard trim,Nervous around dryers,6,2026-08-07
+PET-006,CUS-006,Rhea Alvarez,Simba,Cat,Russian Blue,3,Medium,"Short, plush",None,None,Sanitary trim,Anxious with strangers,1,2026-10-18
+PET-007,CUS-007,Dominic Lacson,Mochi,Dog,Miniature Schnauzer,2,Small,Wiry,None,None,Bath and blow dry only,Nervous around dryers,1,2026-10-06
+PET-008,CUS-008,Mylene Miranda,Teddy,Dog,Siberian Husky,13,Large,"Double, thick",None,Dental disease,Hypoallergenic shampoo only,Bites during nail trim - muzzle needed,6,2026-05-17
+PET-009,CUS-009,Charlene Gonzales,Shadow,Cat,British Shorthair,5,Medium,"Short, dense",None,None,Hypoallergenic shampoo only,Scratches during nail trim - towel wrap needed,14,2026-03-21
+PET-010,CUS-010,Maria Del Rosario,Whiskers,Cat,Ragdoll,4,Large,Semi-long,None,None,Brush-out only,Calm and friendly,6,2026-08-12
+PET-011,CUS-011,Rafael Torres,Rocky,Dog,French Bulldog,10,Small,Short,Latex,Arthritis (needs short sessions),Summer cut (short all over),Nervous around dryers,6,2026-10-10
+PET-012,CUS-012,Jasmine Mendoza,Sushi,Cat,Maine Coon,3,Large,"Long, shaggy",None,None,Brush-out only,Dislikes water - quick bath,5,2026-07-17
+PET-013,CUS-013,Charlene Santos,Kiko,Cat,Russian Blue,11,Medium,"Short, plush",Latex,Matting-prone coat,Brush-out only,Dislikes water - quick bath,1,2026-10-20
+PET-014,CUS-014,Theo Lacson,Loki,Cat,Ragdoll,8,Large,Semi-long,None,None,Nail trim and ear cleaning,Needs breaks every 15 minutes,3,2026-06-18
+PET-015,CUS-015,Theo Lim,Duke,Dog,Pomeranian,1,Small,"Double, fluffy",None,Obesity (limit time on table),Bath and blow dry only,Calm and friendly,4,2026-09-26
+PET-016,CUS-016,Paolo Valdez,Lucy,Dog,Maltese,9,Small,"Long, silky",None,Hip dysplasia,Teddy bear cut,Excellent behavior,4,2026-09-29
+PET-017,CUS-017,Samantha Chua,Loki,Cat,Puspin (Philippine domestic),5,Small,Short,None,None,De-matting and brush-out,Hisses at clippers,3,2026-10-16
+PET-018,CUS-018,Denise Pascual,Tala,Cat,Scottish Fold,6,Medium,Short,None,Arthritis (needs short sessions),Hypoallergenic shampoo only,Anxious with strangers,6,2026-06-01
+PET-019,CUS-019,Jules Zamora,Bubbles,Cat,Maine Coon,15,Large,"Long, shaggy",None,Anxiety,Hypoallergenic shampoo only,Needs breaks every 15 minutes,4,2026-08-09
+PET-020,CUS-020,Lara Ocampo,Teddy,Dog,Golden Retriever,13,Large,"Long, double",None,None,Sanitary trim and nails,Very energetic,3,2026-09-13
+PET-021,CUS-021,Cheska Tan,Mimi,Cat,British Shorthair,5,Medium,"Short, dense",None,None,Sanitary trim,Dislikes water - quick bath,13,2026-07-03
+PET-022,CUS-022,Rafael Hernandez,Tigger,Cat,Ragdoll,9,Large,Semi-long,Latex,Arthritis (needs short sessions),Bath and blow dry,Scratches during nail trim - towel wrap needed,5,2026-10-04
+PET-023,CUS-023,Yna Domingo,Misty,Cat,Persian,9,Medium,"Long, thick",Flea saliva,Diabetes (monitored),Brush-out only,Scratches during nail trim - towel wrap needed,12,2026-06-18
+PET-024,CUS-024,Jasmine Manalo,Oliver,Cat,Scottish Fold,6,Medium,Short,None,Anxiety,Sanitary trim,Hisses at clippers,4,2026-09-14
+PET-025,CUS-025,Joshua Alvarez,Misty,Cat,Ragdoll,2,Large,Semi-long,Oatmeal shampoo,Skin allergies,De-matting and brush-out,Needs breaks every 15 minutes,16,2026-03-06
+PET-026,CUS-026,Lorenzo Reyes,Simba,Cat,Scottish Fold,9,Medium,Short,None,Matting-prone coat,Brush-out only,Anxious with strangers,5,2026-10-05
+PET-027,CUS-027,Ramon Soriano,Simba,Cat,British Shorthair,5,Medium,"Short, dense",Chlorhexidine wash,None,Bath and blow dry,Hisses at clippers,1,2026-10-21
+PET-028,CUS-028,Adrian Manalo,Luna,Dog,Chihuahua,12,Small,Short,None,Dental disease,Bath and blow dry only,Needs breaks every 20 minutes,15,2026-04-20
+PET-029,CUS-029,Nathan Garcia,Loki,Cat,Scottish Fold,12,Medium,Short,None,None,De-matting and brush-out,Dislikes water - quick bath,8,2026-04-26
+PET-030,CUS-030,Ivan Miranda,Mimi,Cat,Bengal,9,Medium,"Short, sleek",Tea tree oil,Arthritis (needs short sessions),Nail trim and ear cleaning,Dislikes water - quick bath,1,2026-09-21
+PET-031,CUS-031,Daniel Padilla,Mittens,Cat,Russian Blue,13,Medium,"Short, plush",None,Dental disease,Nail trim and ear cleaning,Scratches during nail trim - towel wrap needed,4,2026-10-20
+PET-032,CUS-032,Mica Cortez,Zeus,Dog,Dachshund,8,Small,Short,None,None,Spa package,Bites during nail trim - muzzle needed,1,2026-10-27
+PET-033,CUS-033,Tomas Valdez,Oreo,Dog,Dachshund,4,Small,Short,None,None,Spa package,Very energetic,7,2026-03-06
+PET-034,CUS-034,Renz Navarro,Lucy,Dog,Golden Retriever,4,Large,"Long, double",Chlorhexidine wash,None,Sanitary trim and nails,Calm and friendly,12,2026-04-30
+PET-035,CUS-035,Louise Zamora,Gizmo,Cat,Puspin (Philippine domestic),7,Small,Short,Flea saliva,None,Sanitary trim,Needs breaks every 15 minutes,6,2026-09-08
+PET-036,CUS-036,Renz Reyes,Muffin,Cat,Scottish Fold,11,Medium,Short,Flea saliva,Dental disease,Lion cut,Scratches during nail trim - towel wrap needed,9,2026-07-05
+PET-037,CUS-037,Clarisse Rivera,Teddy,Dog,Poodle (Toy),6,Small,Curly,None,None,Puppy cut,Anxious with strangers,7,2026-03-08
+PET-038,CUS-038,Andres Villanueva,Mochi,Dog,Labrador Retriever,2,Large,"Short, dense",None,None,Summer cut (short all over),Anxious with strangers,6,2026-08-06
+PET-039,CUS-039,Miguel Evangelista,Muffin,Cat,Ragdoll,6,Large,Semi-long,None,"Dry, sensitive skin",Brush-out only,Scratches during nail trim - towel wrap needed,3,2026-09-13
+PET-040,CUS-040,Aiza Mendoza,Cleo,Cat,Exotic Shorthair,4,Medium,"Short, plush",None,None,De-matting and brush-out,Hides when nervous,4,2026-07-07
+PET-041,CUS-041,Ramon Del Rosario,Mochi,Dog,Shih Tzu,10,Small,"Long, silky",None,Arthritis (needs short sessions),Sanitary trim and nails,Hates being held on table,1,2026-09-14
+PET-042,CUS-042,Nathan Corpuz,Oreo,Dog,Maltese,13,Small,"Long, silky",Flea saliva,Diabetes (monitored),Spa package,Bites during nail trim - muzzle needed,4,2026-09-24
+PET-043,CUS-043,Joshua Corpuz,Pusa,Cat,Scottish Fold,3,Medium,Short,None,None,De-matting and brush-out,Needs breaks every 15 minutes,8,2026-03-29
+PET-044,CUS-044,Nicole Torres,Buddy,Dog,French Bulldog,12,Small,Short,None,"Brachycephalic - breathing issues (keep cool, short dryer time)",Hypoallergenic shampoo only,Hates being held on table,7,2026-08-03
+PET-045,CUS-045,Lara Manalo,Charlie,Dog,Shih Tzu,4,Small,"Long, silky",None,None,Sanitary trim and nails,Excellent behavior,1,2026-10-13
+PET-046,CUS-046,Theo Corpuz,Lucy,Dog,Chihuahua,1,Small,Short,None,None,Spa package,Bites during nail trim - muzzle needed,9,2026-05-13
+PET-047,CUS-047,Ramon Abad,Pudding,Dog,Pomeranian,9,Small,"Double, fluffy",Pollen / seasonal,Heart murmur (avoid stress),Puppy cut,Calm and friendly,3,2026-09-03
+PET-048,CUS-048,Samantha Hernandez,Biscuit,Dog,Samoyed,4,Large,"Double, thick",None,None,Summer cut (short all over),Calm and friendly,2,2026-09-03
+PET-049,CUS-049,Ivan Fernandez,Buddy,Dog,Maltese,12,Small,"Long, silky",Latex,None,Teddy bear cut,Hates being held on table,11,2026-10-06
+PET-050,CUS-050,Dominic Zamora,Zeus,Dog,Pug,10,Small,Short,None,"Brachycephalic - breathing issues (keep cool, short dryer time)",Puppy cut,Needs breaks every 20 minutes,1,2026-10-14

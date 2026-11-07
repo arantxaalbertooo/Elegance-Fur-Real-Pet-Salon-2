@@ -1,0 +1,11 @@
+﻿opportunity_id,customer_id,customer_name,service_id,service_name,owner_id,stage,expected_amount,expected_close_date
+OPP-001,CUS-039,Miguel Evangelista,1,Bath & Blow Dry,REC-001,Won,450,2026-10-31
+OPP-002,CUS-010,Maria Del Rosario,1,Bath & Blow Dry,REC-002,Won,450,2026-11-03
+OPP-003,CUS-017,Samantha Chua,2,Full Haircut,REC-003,Won,650,2026-10-29
+OPP-004,CUS-005,Kiel Hernandez,1,Bath & Blow Dry,REC-001,Lost,450,2026-10-12
+OPP-005,CUS-042,Nathan Corpuz,5,Spa Package,REC-001,Lead,1200,2026-11-02
+OPP-006,CUS-008,Mylene Miranda,2,Full Haircut,REC-003,Lead,650,2026-11-12
+OPP-007,CUS-016,Paolo Valdez,4,Ear Cleaning,REC-001,Qualified,120,2026-11-05
+OPP-008,CUS-036,Renz Reyes,2,Full Haircut,REC-002,Qualified,650,2026-11-05
+OPP-009,CUS-003,Migs Mendoza,2,Full Haircut,REC-003,Proposal,650,2026-11-22
+OPP-010,CUS-021,Cheska Tan,4,Ear Cleaning,REC-001,Proposal,120,2026-11-19

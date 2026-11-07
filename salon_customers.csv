@@ -1,0 +1,51 @@
+﻿id,role,fullName,email,phone,address,status,createdAt,consent_given,consent_date,total_visits,last_visit
+CUS-001,customer,Daniel Lim,customer001@demo.com,09634400297,"135 Bonifacio Street, Pasig",Active,2026-09-07,Yes,2026-09-07,3,2026-10-02
+CUS-002,customer,Mica Zamora,customer002@demo.com,09457178472,"110 Aurora Boulevard, Taytay",Active,2026-10-17,Yes,2026-10-17,0,
+CUS-003,customer,Migs Mendoza,customer003@demo.com,09981933190,"194 Narra Road, Quezon City",Active,2026-01-12,Yes,2026-01-12,7,2026-08-31
+CUS-004,customer,Nicole Cortez,customer004@demo.com,09837929841,"108 Katipunan Avenue, Cainta",Active,2026-09-13,No,,2,2026-09-21
+CUS-005,customer,Kiel Hernandez,customer005@demo.com,09500875475,"33 Bonifacio Street, Taytay",Active,2026-02-11,Yes,2026-02-11,6,2026-08-07
+CUS-006,customer,Rhea Alvarez,customer006@demo.com,09208073702,"167 Narra Road, Taguig",Active,2026-10-12,Yes,2026-10-12,1,2026-10-18
+CUS-007,customer,Dominic Lacson,customer007@demo.com,09642524776,"75 Bonifacio Street, Cainta",Inactive,2026-10-04,Yes,2026-10-04,1,2026-10-06
+CUS-008,customer,Mylene Miranda,customer008@demo.com,09568205258,"177 Sampaguita Street, Taguig",Active,2026-04-24,Yes,2026-04-24,6,2026-05-17
+CUS-009,customer,Charlene Gonzales,customer009@demo.com,09210521854,"152 Bayanihan Street, Quezon City",Active,2026-02-25,Yes,2026-02-25,14,2026-03-21
+CUS-010,customer,Maria Del Rosario,customer010@demo.com,09130411895,"82 Bonifacio Street, Antipolo",Active,2026-08-05,Yes,2026-08-05,6,2026-08-12
+CUS-011,customer,Rafael Torres,customer011@demo.com,09464506045,"76 Aurora Boulevard, Marikina",Active,2026-07-15,Yes,2026-07-15,6,2026-10-10
+CUS-012,customer,Jasmine Mendoza,customer012@demo.com,09594069256,"100 Mabini Avenue, Taguig",Active,2026-03-06,Yes,2026-03-06,5,2026-07-17
+CUS-013,customer,Charlene Santos,customer013@demo.com,09230048764,"82 Del Pilar Avenue, Marikina",Active,2026-10-16,No,,1,2026-10-20
+CUS-014,customer,Theo Lacson,customer014@demo.com,09370382653,"145 Acacia Street, Pasig",Active,2026-06-16,Yes,2026-06-16,3,2026-06-18
+CUS-015,customer,Theo Lim,customer015@demo.com,09270586021,"78 Luna Street, Quezon City",Active,2026-06-13,Yes,2026-06-13,4,2026-09-26
+CUS-016,customer,Paolo Valdez,customer016@demo.com,09281126584,"81 Kalayaan Avenue, Taguig",Active,2026-07-25,Yes,2026-07-25,4,2026-09-29
+CUS-017,customer,Samantha Chua,customer017@demo.com,09280258220,"31 Narra Road, Antipolo",Active,2026-08-09,Yes,2026-08-09,3,2026-10-16
+CUS-018,customer,Denise Pascual,customer018@demo.com,09164941577,"32 Narra Road, Taguig",Active,2026-03-10,Yes,2026-03-10,6,2026-06-01
+CUS-019,customer,Jules Zamora,customer019@demo.com,09256885576,"82 Del Pilar Avenue, Taguig",Active,2026-06-13,Yes,2026-06-13,4,2026-08-09
+CUS-020,customer,Lara Ocampo,customer020@demo.com,09926451547,"69 Del Pilar Avenue, Quezon City",Active,2026-07-19,Yes,2026-07-19,3,2026-09-13
+CUS-021,customer,Cheska Tan,customer021@demo.com,09651788365,"167 Luna Street, Antipolo",Active,2026-01-16,Yes,2026-01-16,13,2026-07-03
+CUS-022,customer,Rafael Hernandez,customer022@demo.com,09750031450,"55 Bonifacio Street, Quezon City",Active,2026-08-05,No,,5,2026-10-04
+CUS-023,customer,Yna Domingo,customer023@demo.com,09241968982,"29 Kalayaan Avenue, Quezon City",Active,2026-04-27,Yes,2026-04-27,12,2026-06-18
+CUS-024,customer,Jasmine Manalo,customer024@demo.com,09747540720,"125 Luna Street, Quezon City",Active,2026-06-29,Yes,2026-06-29,4,2026-09-14
+CUS-025,customer,Joshua Alvarez,customer025@demo.com,09884791889,"85 Bonifacio Street, Pasig",Active,2026-02-01,Yes,2026-02-01,16,2026-03-06
+CUS-026,customer,Lorenzo Reyes,customer026@demo.com,09307336882,"133 Rizal Street, Quezon City",Active,2026-07-20,Yes,2026-07-20,5,2026-10-05
+CUS-027,customer,Ramon Soriano,customer027@demo.com,09329822290,"172 Kalayaan Avenue, Quezon City",Active,2026-10-04,Yes,2026-10-04,1,2026-10-21
+CUS-028,customer,Adrian Manalo,customer028@demo.com,09978043858,"25 Bonifacio Street, Mandaluyong",Active,2026-02-01,Yes,2026-02-01,15,2026-04-20
+CUS-029,customer,Nathan Garcia,customer029@demo.com,09166323373,"97 Del Pilar Avenue, Mandaluyong",Active,2026-01-19,Yes,2026-01-19,8,2026-04-26
+CUS-030,customer,Ivan Miranda,customer030@demo.com,09311592123,"166 Mabini Avenue, Taguig",Active,2026-09-08,Yes,2026-09-08,1,2026-09-21
+CUS-031,customer,Daniel Padilla,customer031@demo.com,09572128357,"98 Sampaguita Street, Antipolo",Inactive,2026-08-28,Yes,2026-08-28,4,2026-10-20
+CUS-032,customer,Mica Cortez,customer032@demo.com,09814401901,"137 Bonifacio Street, Marikina",Active,2026-10-11,Yes,2026-10-11,1,2026-10-27
+CUS-033,customer,Tomas Valdez,customer033@demo.com,09400198152,"80 Bonifacio Street, Taguig",Active,2026-01-18,Yes,2026-01-18,7,2026-03-06
+CUS-034,customer,Renz Navarro,customer034@demo.com,09197967807,"57 Mabini Avenue, Antipolo",Active,2026-01-26,Yes,2026-01-26,12,2026-04-30
+CUS-035,customer,Louise Zamora,customer035@demo.com,09281953918,"45 Bonifacio Street, Mandaluyong",Active,2026-07-04,Yes,2026-07-04,6,2026-09-08
+CUS-036,customer,Renz Reyes,customer036@demo.com,09142038178,"172 Kalayaan Avenue, Pasig",Active,2026-04-01,Yes,2026-04-01,9,2026-07-05
+CUS-037,customer,Clarisse Rivera,customer037@demo.com,09049074182,"142 Katipunan Avenue, Taguig",Active,2026-02-20,Yes,2026-02-20,7,2026-03-08
+CUS-038,customer,Andres Villanueva,customer038@demo.com,09817922328,"53 Narra Road, Pasig",Active,2026-01-21,No,,6,2026-08-06
+CUS-039,customer,Miguel Evangelista,customer039@demo.com,09527812061,"180 Bonifacio Street, Mandaluyong",Active,2026-09-04,Yes,2026-09-04,3,2026-09-13
+CUS-040,customer,Aiza Mendoza,customer040@demo.com,09499924800,"89 Aurora Boulevard, Cainta",Active,2026-05-06,Yes,2026-05-06,4,2026-07-07
+CUS-041,customer,Ramon Del Rosario,customer041@demo.com,09098426407,"157 Acacia Street, Cainta",Active,2026-09-06,Yes,2026-09-06,1,2026-09-14
+CUS-042,customer,Nathan Corpuz,customer042@demo.com,09479674521,"158 Narra Road, Antipolo",Active,2026-08-17,Yes,2026-08-17,4,2026-09-24
+CUS-043,customer,Joshua Corpuz,customer043@demo.com,09863984886,"179 Acacia Street, Pasig",Active,2026-02-25,Yes,2026-02-25,8,2026-03-29
+CUS-044,customer,Nicole Torres,customer044@demo.com,09927670940,"154 Narra Road, Pasig",Active,2026-04-15,Yes,2026-04-15,7,2026-08-03
+CUS-045,customer,Lara Manalo,customer045@demo.com,09683068669,"95 Rizal Street, Mandaluyong",Active,2026-09-21,Yes,2026-09-21,1,2026-10-13
+CUS-046,customer,Theo Corpuz,customer046@demo.com,09811136179,"90 Katipunan Avenue, Marikina",Active,2026-03-26,Yes,2026-03-26,9,2026-05-13
+CUS-047,customer,Ramon Abad,customer047@demo.com,09138759211,"90 Rizal Street, Cainta",Active,2026-08-28,No,,3,2026-09-03
+CUS-048,customer,Samantha Hernandez,customer048@demo.com,09770775106,"48 Mabini Avenue, Marikina",Active,2026-08-30,Yes,2026-08-30,2,2026-09-03
+CUS-049,customer,Ivan Fernandez,customer049@demo.com,09446135161,"149 Sampaguita Street, Quezon City",Active,2026-03-18,Yes,2026-03-18,11,2026-10-06
+CUS-050,customer,Dominic Zamora,customer050@demo.com,09439725844,"81 Bayanihan Street, Taguig",Active,2026-10-01,Yes,2026-10-01,1,2026-10-14
